@@ -1,0 +1,358 @@
+---
+const plans = [
+  {
+    name: '基础版',
+    desc: '适合初创团队与基础抓取需求',
+    price: '99',
+    interval: '/月',
+    features: ['5 万次并发抓取/月', '标准反爬规则池', '基础动态页面渲染', '社区支持', '7日数据保留'],
+    cta: '免费开始',
+    ctaHref: '#',
+    featured: false,
+    tag: '',
+  },
+  {
+    name: '专业版',
+    desc: '专为高并发重度业务设计',
+    price: '399',
+    interval: '/月',
+    features: ['100 万次并发抓取/月', '高级智能代理池', '定制化抓取规则 x5', '优先工单支持', '无限数据保留'],
+    cta: '开始 14 天免费试用',
+    ctaHref: '#',
+    featured: true,
+    tag: '最受欢迎',
+  },
+  {
+    name: '企业版',
+    desc: '私有化部署与极致安全',
+    price: '定制',
+    interval: '',
+    features: ['独立高吞吐物理集群', '无限制定制化规则', '1对1专属架构师', 'SLA 99.99% 保障', '私有化部署支持'],
+    cta: '联系销售团队',
+    ctaHref: '#',
+    featured: false,
+    tag: '',
+  },
+];
+---
+
+<section class="pricing section" id="pricing">
+  <div class="container">
+    <div class="island">
+    <div class="pricing__header">
+      <p class="section-eyebrow">定价方案</p>
+      <h2 class="section-title">适配各类规模的定制方案</h2>
+      <p class="section-desc">无论您是需要基础的数据监控，还是构建千万级并发的抓取引擎，我们都有合适的选择。</p>
+      <p class="section-desc" style="margin: 0 auto">所有方案均包含 14 天免费试用，无需提供信用卡信息。</p>
+
+      <!-- Toggle -->
+      <div class="pricing__toggle">
+        <span class="pricing__toggle-label" id="label-monthly">按月付费</span>
+        <button class="pricing__toggle-btn" id="billing-toggle" aria-label="切换付费周期" aria-pressed="false">
+          <span class="pricing__toggle-thumb"></span>
+        </button>
+        <span class="pricing__toggle-label" id="label-annual">
+          按年付费
+          <span class="pricing__toggle-save">省 20%</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Pricing cards -->
+    <div class="pricing__grid">
+      {plans.map((plan, i) => (
+        <div class:list={['pricing-card', plan.featured && 'pricing-card--featured']} data-animate style={`--delay: ${i * 100}ms`}>
+          {plan.tag && (
+            <div class="pricing-card__tag">{plan.tag}</div>
+          )}
+          <div class="pricing-card__header">
+            <div class="pricing-card__name">{plan.name}</div>
+            <div class="pricing-card__desc">{plan.desc}</div>
+          </div>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount" data-monthly={plan.price} data-annual={plan.price === '¥0' ? '¥0' : `¥${parseInt(plan.price.replace('¥', '')) * 0.8 | 0}`}>
+              {plan.price}
+            </span>
+            <span class="pricing-card__period">{plan.interval}</span>
+          </div>
+          <a href={plan.ctaHref} class:list={['btn', plan.featured ? 'btn--primary' : 'btn--ghost']}>
+            {plan.cta}
+          </a>
+          <ul class="pricing-card__features">
+            {plan.features.map(f => (
+              <li class="pricing-card__feature">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="pricing-card__check" aria-hidden="true">
+                  <circle cx="8" cy="8" r="8" fill={plan.featured ? 'rgba(255,255,255,0.2)' : 'rgba(16,185,129,0.15)'}/>
+                  <path d="M5 8l2 2 4-4" stroke={plan.featured ? 'white' : '#10B981'} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                {f}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <!-- Enterprise note -->
+    <div class="pricing__enterprise">
+      <p>需要超过 500 名用户的定制方案？
+        <a href="#" class="pricing__enterprise-link">联系我们的企业销售团队 →</a>
+      </p>
+    </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pricing__header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .pricing__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 32px;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 100px;
+    padding: 8px 20px;
+  }
+
+  .pricing__toggle-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gray-500);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pricing__toggle-save {
+    background: var(--orange-pale);
+    color: var(--orange);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 100px;
+  }
+
+  .pricing__toggle-btn {
+    width: 44px;
+    height: 24px;
+    background: var(--gray-200);
+    border-radius: 100px;
+    position: relative;
+    transition: background 0.2s;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .pricing__toggle-btn.on {
+    background: var(--orange);
+  }
+
+  .pricing__toggle-thumb {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: transform 0.2s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  }
+
+  .pricing__toggle-btn.on .pricing__toggle-thumb {
+    transform: translateX(20px);
+  }
+
+  .pricing__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    align-items: start;
+  }
+
+  .pricing-card {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease var(--delay, 0ms), transform 0.5s ease var(--delay, 0ms), box-shadow 0.2s ease;
+  }
+
+  .pricing-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .pricing-card:hover {
+    box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+  }
+
+  .pricing-card--featured {
+    background: var(--black);
+    color: white;
+    border-color: transparent;
+    transform: translateY(-8px);
+    box-shadow: 0 24px 64px rgba(0,0,0,0.2);
+  }
+
+  .pricing-card--featured.visible {
+    transform: translateY(-8px);
+  }
+
+  .pricing-card--featured:hover {
+    box-shadow: 0 32px 80px rgba(0,0,0,0.25);
+    transform: translateY(-12px);
+  }
+
+  .pricing-card__tag {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--orange);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 16px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .pricing-card__name {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+
+  .pricing-card__desc {
+    font-size: 13px;
+    color: var(--gray-500);
+    line-height: 1.5;
+  }
+
+  .pricing-card--featured .pricing-card__desc {
+    color: rgba(255,255,255,0.5);
+  }
+
+  .pricing-card__price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    padding: 20px 0;
+    border-top: 1px solid rgba(0,0,0,0.07);
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+  }
+
+  .pricing-card--featured .pricing-card__price {
+    border-color: rgba(255,255,255,0.1);
+  }
+
+  .pricing-card__amount {
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  .pricing-card__period {
+    font-size: 14px;
+    color: var(--gray-400);
+    font-weight: 500;
+  }
+
+  .pricing-card--featured .pricing-card__period {
+    color: rgba(255,255,255,0.4);
+  }
+
+  .pricing-card__features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pricing-card__feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--gray-700);
+  }
+
+  .pricing-card--featured .pricing-card__feature {
+    color: rgba(255,255,255,0.8);
+  }
+
+  .pricing-card__check {
+    flex-shrink: 0;
+  }
+
+  .pricing__enterprise {
+    text-align: center;
+    margin-top: 48px;
+    font-size: 14px;
+    color: var(--gray-500);
+  }
+
+  .pricing__enterprise-link {
+    color: var(--orange);
+    font-weight: 600;
+    transition: opacity 0.2s;
+  }
+
+  .pricing__enterprise-link:hover {
+    opacity: 0.8;
+  }
+
+  @media (max-width: 900px) {
+    .pricing__grid {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .pricing-card--featured {
+      transform: translateY(0);
+    }
+
+    .pricing-card--featured.visible {
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  const toggleBtn = document.getElementById('billing-toggle');
+  let isAnnual = false;
+
+  toggleBtn?.addEventListener('click', () => {
+    isAnnual = !isAnnual;
+    toggleBtn.classList.toggle('on', isAnnual);
+    toggleBtn.setAttribute('aria-pressed', String(isAnnual));
+
+    document.querySelectorAll<HTMLElement>('.pricing-card__amount').forEach(el => {
+      el.textContent = isAnnual ? (el.dataset.annual || '') : (el.dataset.monthly || '');
+    });
+  });
+
+  const pcards = document.querySelectorAll('.pricing-card[data-animate]');
+  const pobs = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  pcards.forEach(el => pobs.observe(el));
+</script>

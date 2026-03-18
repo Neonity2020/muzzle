@@ -1,0 +1,242 @@
+---
+---
+
+<header class="navbar" id="navbar">
+  <div class="container navbar__inner">
+    <!-- Logo -->
+    <a href="/" class="navbar__logo" aria-label="Muzzle Home">
+      <span class="navbar__logo-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="8" fill="#E8511A"/>
+          <path d="M8 22L14 10L20 18L23 14L24 22" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="navbar__logo-text">Muzzle</span>
+    </a>
+
+    <!-- Nav Links -->
+    <nav class="navbar__nav" aria-label="Main navigation">
+      <a href="#features" class="navbar__link">功能</a>
+      <a href="#how-it-works" class="navbar__link">工作原理</a>
+      <a href="#pricing" class="navbar__link">定价</a>
+      <a href="#faq" class="navbar__link">常见问题</a>
+    </nav>
+
+    <!-- CTA -->
+    <div class="navbar__cta">
+      <a href="#pricing" class="btn btn--ghost btn--sm">登录</a>
+      <a href="#pricing" class="btn btn--dark btn--sm">免费开始</a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button class="navbar__burger" id="menu-btn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="navbar__mobile" id="mobile-menu" aria-hidden="true">
+    <a href="#features" class="navbar__mobile-link">功能</a>
+    <a href="#how-it-works" class="navbar__mobile-link">工作原理</a>
+    <a href="#pricing" class="navbar__mobile-link">定价</a>
+    <a href="#faq" class="navbar__mobile-link">常见问题</a>
+    <div class="navbar__mobile-cta">
+      <a href="#pricing" class="btn btn--ghost btn--sm">登录</a>
+      <a href="#pricing" class="btn btn--primary btn--sm">免费开始</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: rgba(235, 235, 235, 0.7);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .navbar.scrolled {
+    background: rgba(235, 235, 235, 0.88);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+  }
+
+  .navbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    gap: 32px;
+  }
+
+  .navbar__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+  }
+
+  .navbar__logo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .navbar__nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .navbar__link {
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gray-700);
+    transition: color 0.2s ease, background 0.2s ease;
+  }
+
+  .navbar__link:hover {
+    color: var(--black);
+    background: var(--gray-100);
+  }
+
+  .navbar__cta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .navbar__burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+
+  .navbar__burger:hover {
+    background: var(--gray-100);
+  }
+
+  .navbar__burger span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--black);
+    border-radius: 2px;
+    transition: all 0.25s ease;
+  }
+
+  .navbar__burger.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .navbar__burger.active span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .navbar__burger.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .navbar__mobile {
+    display: none;
+    flex-direction: column;
+    padding: 16px 24px 24px;
+    border-top: 1px solid var(--gray-100);
+    gap: 4px;
+    animation: slideDown 0.2s ease;
+  }
+
+  .navbar__mobile.open {
+    display: flex;
+  }
+
+  .navbar__mobile-link {
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--gray-700);
+    transition: background 0.2s;
+  }
+
+  .navbar__mobile-link:hover {
+    background: var(--gray-100);
+    color: var(--black);
+  }
+
+  .navbar__mobile-cta {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--gray-100);
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    .navbar__nav,
+    .navbar__cta {
+      display: none;
+    }
+    .navbar__burger {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  // Scroll effect
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      navbar?.classList.add('scrolled');
+    } else {
+      navbar?.classList.remove('scrolled');
+    }
+  });
+
+  // Mobile menu toggle
+  menuBtn?.addEventListener('click', () => {
+    const isOpen = mobileMenu?.classList.contains('open');
+    mobileMenu?.classList.toggle('open');
+    menuBtn?.classList.toggle('active');
+    menuBtn?.setAttribute('aria-expanded', String(!isOpen));
+    mobileMenu?.setAttribute('aria-hidden', String(isOpen));
+  });
+
+  // Close mobile menu on link click
+  mobileMenu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      menuBtn?.classList.remove('active');
+    });
+  });
+</script>

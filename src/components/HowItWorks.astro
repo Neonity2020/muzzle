@@ -1,0 +1,623 @@
+---
+const steps = [
+  {
+    num: '01',
+    title: '需求对接',
+    subtitle: '告诉我们您的目标',
+    description: '深入沟通您的业务场景与数据需求。无论是竞品监控、舆情分析还是通用抓取，我们将为您定制专属方案。',
+    link: '#contact',
+    linkText: '联系咨询',
+    color: '#E8511A',
+    visual: 'chat',
+  },
+  {
+    num: '02',
+    title: '定制开发',
+    subtitle: '核心规则与自动化逻辑',
+    description: '我们的技术专家将为您编写最优的抓取规则。彻底解决验证码、反爬机制及动态渲染等技术难题。',
+    link: '#features',
+    linkText: '查看技术栈',
+    color: '#6366F1',
+    visual: 'settings',
+  },
+  {
+    num: '03',
+    title: '云端部署',
+    subtitle: '高可用集群调度',
+    description: '将定制好的 Open Claw 实例一键部署至 Muzzle 高可用集群，获取极致吞吐量的抓取并发性能。',
+    link: '#features',
+    linkText: '了解并发能力',
+    color: '#10B981',
+    visual: 'settings',
+  },
+  {
+    num: '04',
+    title: '数据交付',
+    subtitle: '实时数据流无缝集成',
+    description: '通过 API、Webhook 或直接导入数据库，将结构化数据实时交付。持续监控与维护，确保数据流稳定。',
+    link: '#pricing',
+    linkText: '获取定制方案',
+    color: '#F59E0B',
+    visual: 'payment',
+  },
+];
+---
+
+<section class="how-it-works section" id="how-it-works">
+  <div class="container">
+    <div class="island">
+    <div class="hiw__header">
+      <p class="section-eyebrow">工作流程</p>
+      <h2 class="section-title">三步开启您的<br />专属自动化</h2>
+      <p class="section-desc">从需求提出到数据交付，体验无与伦比的流畅接入过程。</p>
+    </div>
+
+    <!-- Step tabs -->
+    <div class="hiw__tabs" role="tablist">
+      {steps.map((step, i) => (
+        <button
+          class:list={['hiw__tab', i === 0 && 'active']}
+          role="tab"
+          aria-selected={i === 0}
+          aria-controls={`step-panel-${i}`}
+          id={`step-tab-${i}`}
+          data-index={i}
+          style={`--step-color: ${step.color}`}
+        >
+          <span class="hiw__tab-num">{step.num}</span>
+          <span class="hiw__tab-label">{step.title}</span>
+        </button>
+      ))}
+    </div>
+
+    <!-- Step panels -->
+    <div class="hiw__panels">
+      {steps.map((step, i) => (
+        <div
+          class:list={['hiw__panel', i === 0 && 'active']}
+          role="tabpanel"
+          id={`step-panel-${i}`}
+          aria-labelledby={`step-tab-${i}`}
+        >
+          <div class="hiw__panel-content">
+            <div class="hiw__panel-text">
+              <span class="hiw__step-badge" style={`background: ${step.color}20; color: ${step.color}`}>
+                步骤 {step.num}
+              </span>
+              <h3 class="hiw__panel-title">{step.subtitle}</h3>
+              <p class="hiw__panel-desc">{step.description}</p>
+              <a href={step.link} class="btn btn--primary" style={`background: ${step.color}`}>
+                {step.linkText}
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+
+            <div class="hiw__panel-visual">
+              {step.visual === 'chat' && (
+                <div class="hiw__visual-chat">
+                  <div class="hiw__chat-msg hiw__chat-msg--ai">
+                    <div class="hiw__chat-avatar">
+                      <svg width="16" height="16" viewBox="0 0 32 32" fill="none">
+                        <rect width="32" height="32" rx="8" fill="white"/>
+                        <path d="M8 22L14 10L20 18L23 14L24 22" stroke="#E8511A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                    <div class="hiw__chat-bubble">👋 你好！我是 Muzzle，请输入您需要抓取的目标网址</div>
+                  </div>
+                  <div class="hiw__chat-msg hiw__chat-msg--user">
+                    <div class="hiw__chat-bubble">我想实时监控竞争对手的商品价格变动</div>
+                  </div>
+                  <div class="hiw__chat-msg hiw__chat-msg--system">
+                    <div class="hiw__chat-bubble">已为您匹配专属反爬规则集，集群调度中... 🚀</div>
+                  </div>
+                  <div class="hiw__chat-typing">
+                    <span></span><span></span><span></span>
+                  </div>
+                </div>
+              )}
+              {step.visual === 'chart' && (
+                <div class="hiw__visual-insights">
+                  <div class="hiw__insight-header">
+                    <strong>本周洞察</strong>
+                    <span class="hiw__insight-badge">+12% 提升</span>
+                  </div>
+                  {[
+                    { label: '任务完成率', val: 87, color: '#6366F1' },
+                    { label: '团队协作指数', val: 94, color: '#10B981' },
+                    { label: '专注时间', val: 72, color: '#F59E0B' },
+                    { label: '响应速度', val: 91, color: '#E8511A' },
+                  ].map(m => (
+                    <div class="hiw__metric">
+                      <div class="hiw__metric-label">
+                        <span>{m.label}</span>
+                        <span>{m.val}%</span>
+                      </div>
+                      <div class="hiw__metric-bar">
+                        <div class="hiw__metric-fill" style={`width: ${m.val}%; background: ${m.color}`}></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {step.visual === 'settings' && (
+                <div class="hiw__visual-settings">
+                  <div class="hiw__settings-title">个性化偏好</div>
+                  {[
+                    { label: '工作时间提醒', on: true },
+                    { label: 'AI 任务建议', on: true },
+                    { label: '团队动态推送', on: false },
+                    { label: '智能优先级排序', on: true },
+                    { label: '截止日期预警', on: true },
+                  ].map(pref => (
+                    <div class="hiw__pref">
+                      <span class="hiw__pref-label">{pref.label}</span>
+                      <span class:list={['hiw__toggle', pref.on && 'on']}></span>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {step.visual === 'payment' && (
+                <div class="hiw__visual-payment">
+                  <div class="hiw__payment-card">
+                    <div class="hiw__payment-card-top">
+                      <span class="hiw__payment-label">收款成功</span>
+                      <span class="hiw__payment-check">✓</span>
+                    </div>
+                    <div class="hiw__payment-amount">¥ 12,800</div>
+                    <div class="hiw__payment-from">来自 张三 · 设计服务</div>
+                    <div class="hiw__payment-time">今天 14:32</div>
+                  </div>
+                  <div class="hiw__payment-list">
+                    {[
+                      { name: '李明', amt: '¥ 3,200', time: '昨日' },
+                      { name: '王芳', amt: '¥ 8,500', time: '2天前' },
+                      { name: '赵磊', amt: '¥ 1,600', time: '本周' },
+                    ].map(tx => (
+                      <div class="hiw__payment-tx">
+                        <div class="hiw__payment-tx-avatar"></div>
+                        <span class="hiw__payment-tx-name">{tx.name}</span>
+                        <span class="hiw__payment-tx-time">{tx.time}</span>
+                        <span class="hiw__payment-tx-amt">{tx.amt}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hiw__header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .hiw__tabs {
+    display: flex;
+    gap: 8px;
+    background: var(--white);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: var(--radius-lg);
+    padding: 8px;
+    margin-bottom: 32px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .hiw__tabs::-webkit-scrollbar { display: none; }
+
+  .hiw__tab {
+    flex: 1;
+    min-width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    border: none;
+    background: transparent;
+    color: var(--gray-500);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .hiw__tab:hover {
+    background: var(--gray-50);
+    color: var(--black);
+  }
+
+  .hiw__tab.active {
+    background: var(--step-color, var(--orange));
+    color: white;
+  }
+
+  .hiw__tab-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+  }
+
+  .hiw__tab-label {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .hiw__panel {
+    display: none;
+  }
+
+  .hiw__panel.active {
+    display: block;
+    animation: fadeInPanel 0.35s ease;
+  }
+
+  @keyframes fadeInPanel {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hiw__panel-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    background: white;
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(0,0,0,0.07);
+    padding: 60px;
+  }
+
+  .hiw__step-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-bottom: 16px;
+  }
+
+  .hiw__panel-title {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .hiw__panel-desc {
+    font-size: 15px;
+    color: var(--gray-500);
+    line-height: 1.75;
+    margin-bottom: 28px;
+  }
+
+  .hiw__panel-visual {
+    background: var(--gray-50);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(0,0,0,0.06);
+    padding: 28px;
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Chat visual */
+  .hiw__visual-chat {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .hiw__chat-msg {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .hiw__chat-msg--user {
+    flex-direction: row-reverse;
+  }
+
+  .hiw__chat-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: var(--orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .hiw__chat-bubble {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--gray-700);
+    line-height: 1.5;
+    max-width: 80%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .hiw__chat-msg--user .hiw__chat-bubble {
+    background: var(--orange);
+    color: white;
+    border-color: transparent;
+  }
+
+  .hiw__chat-typing {
+    display: flex;
+    gap: 4px;
+    padding: 12px 16px;
+    background: white;
+    border-radius: 14px;
+    border: 1px solid rgba(0,0,0,0.08);
+    width: fit-content;
+  }
+
+  .hiw__chat-typing span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gray-300);
+    animation: typingBounce 1.2s ease-in-out infinite;
+  }
+
+  .hiw__chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .hiw__chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes typingBounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-4px); }
+  }
+
+  /* Insights visual */
+  .hiw__visual-insights {
+    width: 100%;
+  }
+
+  .hiw__insight-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+
+  .hiw__insight-badge {
+    background: #ECFDF5;
+    color: #10B981;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
+
+  .hiw__metric {
+    margin-bottom: 14px;
+  }
+
+  .hiw__metric-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-700);
+    margin-bottom: 6px;
+  }
+
+  .hiw__metric-bar {
+    height: 8px;
+    background: var(--gray-100);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+
+  .hiw__metric-fill {
+    height: 100%;
+    border-radius: 100px;
+    transition: width 1s ease;
+  }
+
+  /* Settings visual */
+  .hiw__visual-settings {
+    width: 100%;
+  }
+
+  .hiw__settings-title {
+    font-weight: 700;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+
+  .hiw__pref {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--gray-100);
+    font-size: 14px;
+    color: var(--gray-700);
+  }
+
+  .hiw__pref:last-child {
+    border-bottom: none;
+  }
+
+  .hiw__toggle {
+    width: 40px;
+    height: 22px;
+    border-radius: 100px;
+    background: var(--gray-200);
+    position: relative;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+
+  .hiw__toggle::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: white;
+    top: 3px;
+    left: 3px;
+    transition: transform 0.2s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  }
+
+  .hiw__toggle.on {
+    background: #10B981;
+  }
+
+  .hiw__toggle.on::after {
+    transform: translateX(18px);
+  }
+
+  /* Payment visual */
+  .hiw__visual-payment {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .hiw__payment-card {
+    background: linear-gradient(135deg, #E8511A, #FF8C5A);
+    color: white;
+    border-radius: 16px;
+    padding: 20px;
+  }
+
+  .hiw__payment-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .hiw__payment-label {
+    font-size: 12px;
+    font-weight: 600;
+    opacity: 0.85;
+  }
+
+  .hiw__payment-check {
+    background: rgba(255,255,255,0.2);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+  }
+
+  .hiw__payment-amount {
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+
+  .hiw__payment-from {
+    font-size: 13px;
+    opacity: 0.8;
+  }
+
+  .hiw__payment-time {
+    font-size: 11px;
+    opacity: 0.6;
+    margin-top: 4px;
+  }
+
+  .hiw__payment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .hiw__payment-tx {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.07);
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .hiw__payment-tx-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--gray-200);
+    flex-shrink: 0;
+  }
+
+  .hiw__payment-tx-name {
+    font-weight: 600;
+    flex: 1;
+  }
+
+  .hiw__payment-tx-time {
+    color: var(--gray-400);
+    font-size: 12px;
+  }
+
+  .hiw__payment-tx-amt {
+    font-weight: 700;
+    color: #10B981;
+  }
+
+  @media (max-width: 768px) {
+    .hiw__panel-content {
+      grid-template-columns: 1fr;
+      padding: 28px 24px;
+      gap: 32px;
+    }
+
+    .hiw__panel-title {
+      font-size: 24px;
+    }
+  }
+</style>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.hiw__tab');
+  const panels = document.querySelectorAll<HTMLElement>('.hiw__panel');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const idx = Number(tab.dataset.index);
+
+      tabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      panels.forEach(p => p.classList.remove('active'));
+
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      panels[idx]?.classList.add('active');
+    });
+  });
+</script>

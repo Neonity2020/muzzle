@@ -1,0 +1,175 @@
+---
+const faqs = [
+  {
+    q: 'Muzzle 和自己运行 Open Claw 有什么区别？',
+    a: '我们解决了部署、维护、代理池和规则更新的所有痛点。并提供深度定制开发，让您专注于业务数据，而非底层基础架构。',
+  },
+  {
+    q: '你们支持哪些平台的抓取？',
+    a: '只要是公开数据，我们的定制 Open Claw 都能处理。我们特别擅长定制复杂的动态页面和强反爬站点的采集规则。',
+  },
+  {
+    q: '如果我们需要极高并发量怎么办？',
+    a: 'Muzzle 专为规模扩张而设计。我们的企业版支持高达千万级的并发请求，您可以随时升级集群资源，无需重新配置。',
+  },
+  {
+    q: '目标站点经常改版导致规则失效怎么办？',
+    a: '我们会为定制规则提供托管维护服务。一旦目标页面结构变动，我们的监控系统会立即告警，技术专家将在第一时间修复规则。',
+  },
+];
+---
+
+<section class="faq section" id="faq">
+  <div class="container">
+    <div class="island">
+    <div class="faq__layout">
+      <div class="faq__header">
+        <p class="section-eyebrow">常见问题</p>
+        <h2 class="section-title">一切您想了解的</h2>
+        <p class="section-desc">找不到您的问题？<br /><a href="#" class="faq__contact-link">联系我们的支持团队 →</a></p>
+      </div>
+
+      <div class="faq__list">
+        {faqs.map((faq, i) => (
+          <div class="faq__item" data-index={i}>
+            <button class="faq__question" aria-expanded="false" aria-controls={`faq-answer-${i}`} id={`faq-question-${i}`}>
+              <span>{faq.q}</span>
+              <span class="faq__icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="faq__answer" id={`faq-answer-${i}`} role="region" aria-labelledby={`faq-question-${i}`}>
+              <p>{faq.a}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq__layout {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .faq__header {
+    position: sticky;
+    top: 100px;
+  }
+
+  .faq__contact-link {
+    color: var(--orange);
+    font-weight: 600;
+    font-size: 14px;
+    transition: opacity 0.2s;
+  }
+
+  .faq__contact-link:hover {
+    opacity: 0.8;
+  }
+
+  .faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .faq__item {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .faq__question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 24px;
+    background: transparent;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--black);
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+
+  .faq__question:hover {
+    background: var(--gray-50);
+  }
+
+  .faq__icon {
+    flex-shrink: 0;
+    display: flex;
+    transition: transform 0.25s ease;
+    color: var(--gray-400);
+  }
+
+  .faq__item.open .faq__icon {
+    transform: rotate(180deg);
+    color: var(--orange);
+  }
+
+  .faq__item.open .faq__question {
+    color: var(--orange);
+  }
+
+  .faq__answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+  }
+
+  .faq__answer p {
+    padding: 0 24px 22px;
+    font-size: 14px;
+    color: var(--gray-500);
+    line-height: 1.75;
+  }
+
+  .faq__item.open .faq__answer {
+    max-height: 300px;
+  }
+
+  @media (max-width: 768px) {
+    .faq__layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .faq__header {
+      position: static;
+    }
+  }
+</style>
+
+<script>
+  const faqItems = document.querySelectorAll('.faq__item');
+
+  faqItems.forEach(item => {
+    const btn = item.querySelector<HTMLButtonElement>('.faq__question');
+    btn?.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      // Close all
+      faqItems.forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq__question')?.setAttribute('aria-expanded', 'false');
+      });
+      // Toggle this one
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

@@ -1,0 +1,588 @@
+---
+---
+
+<section class="hero section" id="hero">
+  <div class="container">
+    <div class="hero__island island">
+      <!-- Animated gradient orbs -->
+      <div class="hero__orb hero__orb--1" aria-hidden="true"></div>
+      <div class="hero__orb hero__orb--2" aria-hidden="true"></div>
+
+      <div class="hero__inner">
+        <h1 class="hero__title">
+          您专属的<br />高度定制化 Open Claw
+        </h1>
+        <p class="hero__desc">
+          Muzzle 提供企业级的 Open Claw 服务托管与深度定制。无需从零搭建，开箱即用的强大抓取与自动化能力，完美融入您的业务流。
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="hero__actions" data-animate>
+          <a href="#pricing" class="btn btn--primary">获取定制方案</a>
+          <a href="#how-it-works" class="btn btn--ghost">查看系统演示</a>
+        </div>
+
+        <!-- Social proof -->
+        <div class="hero__social-proof" data-animate>
+          <div class="hero__avatars">
+            <img src="/avatars/1.svg" alt="用户1" class="hero__avatar" aria-hidden="true" />
+            <img src="/avatars/2.svg" alt="用户2" class="hero__avatar" aria-hidden="true" />
+            <img src="/avatars/3.svg" alt="用户3" class="hero__avatar" aria-hidden="true" />
+            <img src="/avatars/4.svg" alt="用户4" class="hero__avatar" aria-hidden="true" />
+          </div>
+          <div class="hero__social-text">
+            <div class="hero__stars" aria-label="五星好评">
+              ★★★★★
+            </div>
+            <span>已有 <strong>2,000+</strong> 支团队信任我们</span>
+          </div>
+        </div>
+
+        <!-- Hero dashboard preview -->
+        <div class="hero__dashboard" data-animate>
+          <div class="hero__dashboard-inner">
+            <!-- Floating notification card -->
+            <div class="hero__notif hero__notif--1">
+              <div class="hero__notif-icon">🚀</div>
+              <div>
+                <div class="hero__notif-title">部署成功</div>
+                <div class="hero__notif-sub">版本 2.4.1 已上线</div>
+              </div>
+              <span class="hero__notif-badge">刚刚</span>
+            </div>
+
+            <!-- Main dashboard mockup -->
+            <div class="hero__mockup stripe-shadow">
+              <div class="hero__mockup-topbar">
+                <span class="hero__mockup-dot" style="background:#FF5F57"></span>
+                <span class="hero__mockup-dot" style="background:#FFBD2E"></span>
+                <span class="hero__mockup-dot" style="background:#28C840"></span>
+                <span class="hero__mockup-url">app.muzzle.io/dashboard</span>
+              </div>
+
+              <div class="hero__mockup-body">
+                <!-- Sidebar -->
+                <div class="hero__mockup-sidebar">
+                  <div class="hero__mockup-sidebar-logo">
+                    <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+                      <rect width="32" height="32" rx="8" fill="#E8511A"/>
+                      <path d="M8 22L14 10L20 18L23 14L24 22" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  {['仪表板', '项目', '分析', '团队', '设置'].map((item, i) => (
+                    <div class:list={['hero__mockup-nav-item', i === 0 && 'active']}>{item}</div>
+                  ))}
+                </div>
+
+                <!-- Main content -->
+                <div class="hero__mockup-content">
+                  <div class="hero__mockup-stats">
+                    {[
+                      { label: '活跃用户', value: '12,847', change: '+18%', color: '#E8511A' },
+                      { label: '月收入', value: '¥38.2K', change: '+24%', color: '#10B981' },
+                      { label: '转化率', value: '4.8%', change: '+7%', color: '#6366F1' },
+                    ].map(stat => (
+                      <div class="hero__mockup-stat">
+                        <div class="hero__mockup-stat-label">{stat.label}</div>
+                        <div class="hero__mockup-stat-value">{stat.value}</div>
+                        <span class="hero__mockup-stat-change" style={`color: ${stat.color}`}>{stat.change}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <!-- Chart placeholder -->
+                  <div class="hero__mockup-chart">
+                    <div class="hero__chart-bars">
+                      {[40, 65, 45, 80, 55, 90, 70, 95, 60, 85, 75, 100].map((h) => (
+                        <div class="hero__chart-bar" style={`height: ${h}%`}></div>
+                      ))}
+                    </div>
+                    <div class="hero__chart-label">过去 12 个月收入趋势</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating activity card -->
+            <div class="hero__notif hero__notif--2">
+              <div class="hero__notif-icon">📈</div>
+              <div>
+                <div class="hero__notif-title">新用户激增</div>
+                <div class="hero__notif-sub">今日新增 +347 用户</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Partner logos -->
+        <div class="hero__partners" data-animate>
+          <p class="hero__partners-label">获得顶级团队的信任</p>
+          <div class="hero__partners-logos">
+            {['Vercel', 'Linear', 'Notion', 'Loom', 'Arc', 'Framer'].map(name => (
+              <span class="hero__partner-logo">{name}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    /* section padding handles spacing */
+  }
+
+  .hero__island {
+    padding: 80px 64px 72px;
+    overflow: hidden;
+    background: #FAFAF9;
+  }
+
+  .hero__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    animation: floatOrb 8s ease-in-out infinite;
+  }
+
+  .hero__orb--1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(232, 81, 26, 0.15) 0%, transparent 70%);
+    top: -120px;
+    right: -80px;
+  }
+
+  .hero__orb--2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+    bottom: 80px;
+    left: -60px;
+    animation-delay: -4s;
+  }
+
+  @keyframes floatOrb {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(20px, -30px); }
+  }
+
+  .hero__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero__tag {
+    margin-bottom: 28px;
+  }
+
+  .hero__headline {
+    font-size: clamp(60px, 9vw, 96px);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    margin-bottom: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .hero__headline-line {
+    display: block;
+  }
+
+  .hero__headline-line--accent {
+    color: var(--orange);
+  }
+
+  .hero__desc {
+    font-size: 18px;
+    color: var(--gray-500);
+    line-height: 1.75;
+    max-width: 500px;
+    margin-bottom: 40px;
+  }
+
+  .hero__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero__social-proof {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 72px;
+  }
+
+  .hero__avatars {
+    display: flex;
+  }
+
+  .hero__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--white);
+    margin-left: -10px;
+    background: var(--gray-300);
+    object-fit: cover;
+  }
+
+  .hero__avatar:first-child {
+    margin-left: 0;
+  }
+
+  .hero__social-text {
+    text-align: left;
+    font-size: 13px;
+    color: var(--gray-500);
+  }
+
+  .hero__stars {
+    color: #FFB800;
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+
+  /* Dashboard mockup */
+  .hero__dashboard {
+    width: 100%;
+    max-width: 900px;
+    margin-bottom: 80px;
+  }
+
+  .hero__dashboard-inner {
+    position: relative;
+    padding: 24px 0;
+  }
+
+  .hero__notif {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 16px;
+    padding: 12px 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    font-size: 13px;
+    z-index: 2;
+    white-space: nowrap;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .hero__notif--1 {
+    top: 0;
+    left: -20px;
+    animation-delay: 0s;
+  }
+
+  .hero__notif--2 {
+    bottom: 40px;
+    right: -20px;
+    animation-delay: -3s;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .hero__notif-icon {
+    font-size: 20px;
+  }
+
+  .hero__notif-title {
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 2px;
+  }
+
+  .hero__notif-sub {
+    color: var(--gray-500);
+    font-size: 12px;
+  }
+
+  .hero__notif-badge {
+    background: var(--orange-pale);
+    color: var(--orange);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 100px;
+    margin-left: 8px;
+  }
+
+  .hero__mockup {
+    background: white;
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 32px 80px rgba(0,0,0,0.15);
+    overflow: hidden;
+  }
+
+  .hero__mockup-topbar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 18px;
+    background: #F5F5F5;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .hero__mockup-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: block;
+  }
+
+  .hero__mockup-url {
+    margin-left: 12px;
+    font-size: 12px;
+    color: var(--gray-500);
+    background: white;
+    padding: 4px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .hero__mockup-body {
+    display: flex;
+    min-height: 300px;
+  }
+
+  .hero__mockup-sidebar {
+    width: 140px;
+    background: #FAFAFA;
+    border-right: 1px solid rgba(0,0,0,0.06);
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .hero__mockup-sidebar-logo {
+    margin-bottom: 20px;
+  }
+
+  .hero__mockup-nav-item {
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-500);
+    cursor: default;
+    transition: background 0.2s;
+  }
+
+  .hero__mockup-nav-item.active {
+    background: var(--orange-pale);
+    color: var(--orange);
+    font-weight: 600;
+  }
+
+  .hero__mockup-content {
+    flex: 1;
+    padding: 20px;
+    overflow: hidden;
+  }
+
+  .hero__mockup-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .hero__mockup-stat {
+    background: var(--gray-50);
+    border-radius: 12px;
+    padding: 14px;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .hero__mockup-stat-label {
+    font-size: 11px;
+    color: var(--gray-500);
+    margin-bottom: 4px;
+  }
+
+  .hero__mockup-stat-value {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--black);
+    letter-spacing: -0.02em;
+  }
+
+  .hero__mockup-stat-change {
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .hero__mockup-chart {
+    background: var(--gray-50);
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid rgba(0,0,0,0.05);
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .hero__chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 80px;
+    flex: 1;
+  }
+
+  .hero__chart-bar {
+    flex: 1;
+    background: linear-gradient(180deg, var(--orange) 0%, #FFA07A 100%);
+    border-radius: 4px 4px 0 0;
+    min-width: 0;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    animation: growBar 1s ease-out forwards;
+    transform-origin: bottom;
+  }
+
+  @keyframes growBar {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+  }
+
+  .hero__chart-label {
+    font-size: 11px;
+    color: var(--gray-500);
+    margin-top: 8px;
+    text-align: left;
+  }
+
+  /* Partners */
+  .hero__partners {
+    text-align: center;
+  }
+
+  .hero__partners-label {
+    font-size: 12px;
+    color: var(--gray-400);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+
+  .hero__partners-logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .hero__partner-logo {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gray-300);
+    letter-spacing: -0.02em;
+    transition: color 0.2s;
+  }
+
+  .hero__partner-logo:hover {
+    color: var(--gray-500);
+  }
+
+  /* Animate on scroll */
+  [data-animate] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  [data-animate].visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    .hero__island {
+      padding: 48px 24px;
+    }
+
+    .hero__mockup-sidebar {
+      display: none;
+    }
+
+    .hero__mockup-stats {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .hero__notif--1 {
+      left: 0;
+      top: -10px;
+    }
+
+    .hero__notif--2 {
+      right: 0;
+    }
+
+    .hero__partners-logos {
+      gap: 24px;
+    }
+  }
+</style>
+
+<script>
+  // Animate on scroll
+  const animateEls = document.querySelectorAll('[data-animate]');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 100);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  animateEls.forEach(el => observer.observe(el));
+
+  // Generate avatar SVGs dynamically since we don't have real images
+  document.querySelectorAll('.hero__avatar').forEach((img, i) => {
+    const colors = ['#E8511A', '#6366F1', '#10B981', '#F59E0B'];
+    const canvas = document.createElement('canvas');
+    canvas.width = 36;
+    canvas.height = 36;
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      ctx.fillStyle = colors[i % colors.length];
+      ctx.beginPath();
+      ctx.arc(18, 18, 18, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = 'rgba(255,255,255,0.9)';
+      ctx.font = 'bold 14px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(['张', '李', '王', '陈'][i], 18, 18);
+    }
+    (img as HTMLImageElement).src = canvas.toDataURL();
+  });
+</script>

@@ -1,0 +1,98 @@
+---
+---
+
+<section class="cta-section section" id="cta">
+  <div class="container">
+    <div class="island cta-island">
+      <div class="cta-section__orb" aria-hidden="true"></div>
+      <div class="cta-section__inner">
+        <div class="cta-section__content">
+          <span class="tag tag--orange" style="margin-bottom: 20px; display: inline-flex;">🚀 立即行动</span>
+          <h2 class="cta-section__title">今天就构建您的<br />专属数据抓取引擎</h2>
+          <p class="cta-section__desc">
+            加入已有科技企业与开发者的行列，将复杂的数据流收集与自动化任务交给 Muzzle。
+            享受开箱即用、弹性的专属云抓取体验。
+          </p>
+          <div class="cta-section__actions">
+            <a href="#pricing" class="btn btn--primary" style="font-size: 16px; padding: 16px 36px;">
+              获取定制方案 →
+            </a>
+            <a href="#how-it-works" class="btn btn--ghost" style="font-size: 16px; padding: 16px 36px;">
+              观看演示
+            </a>
+          </div>
+          <p class="cta-section__note">无需信用卡 · 14 天免费试用 · 随时取消</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    /* transparent — stripe shows through */
+  }
+
+  .cta-island {
+    background: var(--gray-50);
+    overflow: hidden;
+    position: relative;
+    padding: 48px 40px; /* Tighter vertical spacing */
+  }
+
+  .cta-section__orb {
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232, 81, 26, 0.1) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .cta-section__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-section__content {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-section__title {
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin-bottom: 20px;
+    color: var(--black);
+  }
+
+  .cta-section__desc {
+    font-size: 17px;
+    color: var(--gray-500);
+    line-height: 1.75;
+    margin-bottom: 36px;
+    max-width: 480px;
+  }
+
+  .cta-section__actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .cta-section__note {
+    font-size: 13px;
+    color: var(--gray-400);
+  }
+</style>

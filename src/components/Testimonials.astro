@@ -1,0 +1,286 @@
+---
+const testimonials = [
+  {
+    author: 'David Chen',
+    role: 'CTO @ DataSphere',
+    avatar: 'D',
+    avatarColor: '#E8511A',
+    rating: 5,
+    quote: 'Muzzle 彻底改变了我们的数据获取方式。单日抓取量提升了 400%，而且再也没有遇到过 IP 被封禁的问题。这是我用过最省心的服务。',
+    featured: true,
+  },
+  {
+    name: '李晓丽',
+    role: '产品经理 · Sudo 创始人',
+    avatar: 'L',
+    avatarColor: '#6366F1',
+    rating: 5,
+    quote: '智能提醒功能让我从"救火模式"切换到了"主动管理"。再也不会错过任何关键节点了。AI 洞察真的非常准确，超出了预期。',
+    featured: false,
+  },
+  {
+    author: 'Sarah Jenkins',
+    role: '数据总监 @ AutoMarket',
+    avatar: 'S',
+    avatarColor: '#10B981',
+    rating: 5,
+    quote: '专家团队帮我们解决了极度复杂的动态渲染抓取难题。与我们内部数据库的对接非常顺滑，团队完全不需要自己维护底层基础架构。',
+    featured: false,
+  },
+  {
+    name: '苏雨欣',
+    role: '设计总监 · PixelStudio',
+    avatar: 'S',
+    avatarColor: '#F59E0B',
+    rating: 5,
+    quote: '个性化定制功能让我惊喜。系统真的会学习我的工作偏好，随着时间推移变得越来越懂我。感觉像是有一个 24 小时在线的超级助手。',
+    featured: false,
+  },
+];
+---
+
+<section class="testimonials section" id="testimonials">
+  <div class="container">
+    <div class="island">
+    <div class="testimonials__header">
+      <p class="section-eyebrow">用户评价</p>
+      <h2 class="section-title">深受企业客户喜爱</h2>
+      <p class="section-desc">他们成功构建了属于自己的数据引擎，您也可以。</p>
+    </div>
+
+    <!-- Rating summary -->
+    <div class="testimonials__summary">
+      <div class="testimonials__rating-big">4.9</div>
+      <div class="testimonials__rating-info">
+        <div class="testimonials__stars-big">★★★★★</div>
+        <div class="testimonials__rating-text">基于 <strong>1,200+</strong> 条真实评价</div>
+        <div class="testimonials__platforms">
+          <span>G2 评分 4.9</span>
+          <span>Product Hunt #1</span>
+          <span>Capterra 4.8</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonial grid -->
+    <div class="testimonials__grid">
+      {testimonials.map((t, i) => (
+        <div class:list={['testimonial-card', t.featured && 'testimonial-card--featured']} data-animate style={`--delay: ${i * 100}ms`}>
+          {t.featured && (
+            <div class="testimonial-card__badge">⭐ 精选评价</div>
+          )}
+          <div class="testimonial-card__stars">
+            {'★'.repeat(t.rating)}
+          </div>
+          <p class="testimonial-card__quote">"{t.quote}"</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar" style={`background: ${t.avatarColor}`}>
+              {t.avatar}
+            </div>
+            <div>
+              <div class="testimonial-card__name">{t.name}</div>
+              <div class="testimonial-card__role">{t.role}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+  }
+
+  .testimonials__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .testimonials__summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 64px;
+    padding: 32px;
+    background: var(--gray-50);
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .testimonials__rating-big {
+    font-size: 72px;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: var(--black);
+    line-height: 1;
+  }
+
+  .testimonials__stars-big {
+    color: #FFB800;
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+
+  .testimonials__rating-text {
+    font-size: 14px;
+    color: var(--gray-500);
+    margin-bottom: 12px;
+  }
+
+  .testimonials__platforms {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .testimonials__platforms span {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray-500);
+    background: white;
+    padding: 4px 12px;
+    border-radius: 100px;
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .testimonials__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .testimonial-card {
+    background: var(--gray-50);
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease var(--delay, 0ms), transform 0.5s ease var(--delay, 0ms), box-shadow 0.2s ease;
+  }
+
+  .testimonial-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .testimonial-card:hover {
+    box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+  }
+
+  .testimonial-card--featured {
+    background: var(--black);
+    color: white;
+    border-color: transparent;
+    grid-column: span 2;
+  }
+
+  .testimonial-card--featured .testimonial-card__quote {
+    font-size: 20px;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .testimonial-card--featured .testimonial-card__role {
+    color: rgba(255,255,255,0.5);
+  }
+
+  .testimonial-card__badge {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--orange);
+    background: rgba(232, 81, 26, 0.15);
+    padding: 4px 12px;
+    border-radius: 100px;
+    width: fit-content;
+  }
+
+  .testimonial-card__stars {
+    color: #FFB800;
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+
+  .testimonial-card__quote {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--gray-600);
+    flex: 1;
+  }
+
+  .testimonial-card--featured .testimonial-card__stars {
+    color: #FFD700;
+  }
+
+  .testimonial-card__author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .testimonial-card--featured .testimonial-card__author {
+    border-top-color: rgba(255,255,255,0.1);
+  }
+
+  .testimonial-card__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 800;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .testimonial-card__name {
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .testimonial-card__role {
+    font-size: 12px;
+    color: var(--gray-500);
+  }
+
+  @media (max-width: 768px) {
+    .testimonials__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .testimonial-card--featured {
+      grid-column: span 1;
+    }
+
+    .testimonials__summary {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .testimonials__platforms {
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+  const tcards = document.querySelectorAll('.testimonial-card[data-animate]');
+  const tobs = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  tcards.forEach(el => tobs.observe(el));
+</script>
