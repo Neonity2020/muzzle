@@ -273,4 +273,15 @@ const { title, description = "Launch your next big idea with Mizu — a sleek, r
     box-shadow: var(--shadow-lg);
     transform: translateY(-3px);
   }
+
+  /* Mobile padding optimization */
+  @media (max-width: 768px) {
+    .island {
+      padding: 32px 12px;
+      border-radius: var(--radius-lg);
+    }
+    .container {
+      padding: 0 12px;
+    }
+  }
 </style>
