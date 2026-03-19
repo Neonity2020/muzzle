@@ -3,7 +3,7 @@ const testimonials = [
   {
     author: 'David Chen',
     role: 'CTO @ DataSphere',
-    avatar: 'D',
+    avatar: '/avatars/1.png',
     avatarColor: '#E8511A',
     rating: 5,
     quote: 'Muzzle 彻底改变了我们的数据获取方式。单日抓取量提升了 400%，而且再也没有遇到过 IP 被封禁的问题。这是我用过最省心的服务。',
@@ -12,7 +12,7 @@ const testimonials = [
   {
     name: '李晓丽',
     role: '产品经理 · Sudo 创始人',
-    avatar: 'L',
+    avatar: '/avatars/2.png',
     avatarColor: '#6366F1',
     rating: 5,
     quote: '智能提醒功能让我从"救火模式"切换到了"主动管理"。再也不会错过任何关键节点了。AI 洞察真的非常准确，超出了预期。',
@@ -21,7 +21,7 @@ const testimonials = [
   {
     author: 'Sarah Jenkins',
     role: '数据总监 @ AutoMarket',
-    avatar: 'S',
+    avatar: '/avatars/3.png',
     avatarColor: '#10B981',
     rating: 5,
     quote: '专家团队帮我们解决了极度复杂的动态渲染抓取难题。与我们内部数据库的对接非常顺滑，团队完全不需要自己维护底层基础架构。',
@@ -30,7 +30,7 @@ const testimonials = [
   {
     name: '苏雨欣',
     role: '设计总监 · PixelStudio',
-    avatar: 'S',
+    avatar: '/avatars/4.png',
     avatarColor: '#F59E0B',
     rating: 5,
     quote: '个性化定制功能让我惊喜。系统真的会学习我的工作偏好，随着时间推移变得越来越懂我。感觉像是有一个 24 小时在线的超级助手。',
@@ -74,9 +74,7 @@ const testimonials = [
           </div>
           <p class="testimonial-card__quote">"{t.quote}"</p>
           <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar" style={`background: ${t.avatarColor}`}>
-              {t.avatar}
-            </div>
+            <img src={t.avatar} alt={t.name || t.author} class="testimonial-card__avatar" style={`background: ${t.avatarColor}`} />
             <div>
               <div class="testimonial-card__name">{t.name}</div>
               <div class="testimonial-card__role">{t.role}</div>
@@ -243,6 +241,7 @@ const testimonials = [
     font-weight: 800;
     color: white;
     flex-shrink: 0;
+    object-fit: cover;
   }
 
   .testimonial-card__name {

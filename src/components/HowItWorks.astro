@@ -171,12 +171,12 @@ const steps = [
                   </div>
                   <div class="hiw__payment-list">
                     {[
-                      { name: '李明', amt: '¥ 3,200', time: '昨日' },
-                      { name: '王芳', amt: '¥ 8,500', time: '2天前' },
-                      { name: '赵磊', amt: '¥ 1,600', time: '本周' },
+                      { name: '李明', amt: '¥ 3,200', time: '昨日', avatar: '/avatars/2.png' },
+                      { name: '王芳', amt: '¥ 8,500', time: '2天前', avatar: '/avatars/4.png' },
+                      { name: '赵磊', amt: '¥ 1,600', time: '本周', avatar: '/avatars/3.png' },
                     ].map(tx => (
                       <div class="hiw__payment-tx">
-                        <div class="hiw__payment-tx-avatar"></div>
+                        <img src={tx.avatar} alt={tx.name} class="hiw__payment-tx-avatar" />
                         <span class="hiw__payment-tx-name">{tx.name}</span>
                         <span class="hiw__payment-tx-time">{tx.time}</span>
                         <span class="hiw__payment-tx-amt">{tx.amt}</span>
@@ -571,6 +571,7 @@ const steps = [
     border-radius: 50%;
     background: var(--gray-200);
     flex-shrink: 0;
+    object-fit: cover;
   }
 
   .hiw__payment-tx-name {

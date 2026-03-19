@@ -25,10 +25,10 @@
         <!-- Social proof -->
         <div class="hero__social-proof" data-animate>
           <div class="hero__avatars">
-            <img src="/avatars/1.svg" alt="用户1" class="hero__avatar" aria-hidden="true" />
-            <img src="/avatars/2.svg" alt="用户2" class="hero__avatar" aria-hidden="true" />
-            <img src="/avatars/3.svg" alt="用户3" class="hero__avatar" aria-hidden="true" />
-            <img src="/avatars/4.svg" alt="用户4" class="hero__avatar" aria-hidden="true" />
+            <img src="/avatars/1.png" alt="用户1" class="hero__avatar" aria-hidden="true" />
+            <img src="/avatars/2.png" alt="用户2" class="hero__avatar" aria-hidden="true" />
+            <img src="/avatars/3.png" alt="用户3" class="hero__avatar" aria-hidden="true" />
+            <img src="/avatars/4.png" alt="用户4" class="hero__avatar" aria-hidden="true" />
           </div>
           <div class="hero__social-text">
             <div class="hero__stars" aria-label="五星好评">
@@ -564,25 +564,4 @@
   }, { threshold: 0.1 });
 
   animateEls.forEach(el => observer.observe(el));
-
-  // Generate avatar SVGs dynamically since we don't have real images
-  document.querySelectorAll('.hero__avatar').forEach((img, i) => {
-    const colors = ['#E8511A', '#6366F1', '#10B981', '#F59E0B'];
-    const canvas = document.createElement('canvas');
-    canvas.width = 36;
-    canvas.height = 36;
-    const ctx = canvas.getContext('2d');
-    if (ctx) {
-      ctx.fillStyle = colors[i % colors.length];
-      ctx.beginPath();
-      ctx.arc(18, 18, 18, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = 'rgba(255,255,255,0.9)';
-      ctx.font = 'bold 14px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(['张', '李', '王', '陈'][i], 18, 18);
-    }
-    (img as HTMLImageElement).src = canvas.toDataURL();
-  });
 </script>
