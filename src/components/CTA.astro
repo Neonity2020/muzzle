@@ -1,4 +1,13 @@
 ---
+import { getTranslations } from '../i18n';
+
+// Get locale from URL path - /en/ for English, / for Chinese
+const path = Astro.url.pathname;
+const currentLocale = path.startsWith('/en') ? 'en' : 'zh';
+const t = getTranslations(currentLocale);
+
+// Split title by \n for line breaks
+const titleLines = t.cta.title.split('\\n');
 ---
 
 <section class="cta-section section" id="cta">
@@ -7,21 +16,24 @@
       <div class="cta-section__orb" aria-hidden="true"></div>
       <div class="cta-section__inner">
         <div class="cta-section__content">
-          <span class="tag tag--orange" style="margin-bottom: 20px; display: inline-flex;">🚀 立即行动</span>
-          <h2 class="cta-section__title">今天就构建您的<br />专属数据抓取引擎</h2>
+          <span class="tag tag--orange" style="margin-bottom: 20px; display: inline-flex;">{t.cta.tag}</span>
+          <h2 class="cta-section__title">
+            {titleLines.map((line, i) => (
+              <span>{line}<br /></span>
+            ))}
+          </h2>
           <p class="cta-section__desc">
-            加入已有科技企业与开发者的行列，将复杂的数据流收集与自动化任务交给 Muzzle。
-            享受开箱即用、弹性的专属云抓取体验。
+            {t.cta.description}
           </p>
           <div class="cta-section__actions">
             <a href="#pricing" class="btn btn--primary" style="font-size: 16px; padding: 16px 36px;">
-              获取定制方案 →
+              {t.cta.cta}
             </a>
             <a href="#how-it-works" class="btn btn--ghost" style="font-size: 16px; padding: 16px 36px;">
-              观看演示
+              {t.cta.demo}
             </a>
           </div>
-          <p class="cta-section__note">无需信用卡 · 14 天免费试用 · 随时取消</p>
+          <p class="cta-section__note">{t.cta.note}</p>
         </div>
       </div>
     </div>

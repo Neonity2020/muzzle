@@ -1,59 +1,37 @@
 ---
-const plans = [
-  {
-    name: '基础版',
-    desc: '适合初创团队与基础抓取需求',
-    price: '99',
-    interval: '/月',
-    features: ['5 万次并发抓取/月', '标准反爬规则池', '基础动态页面渲染', '社区支持', '7日数据保留'],
-    cta: '免费开始',
-    ctaHref: '#',
-    featured: false,
-    tag: '',
-  },
-  {
-    name: '专业版',
-    desc: '专为高并发重度业务设计',
-    price: '399',
-    interval: '/月',
-    features: ['100 万次并发抓取/月', '高级智能代理池', '定制化抓取规则 x5', '优先工单支持', '无限数据保留'],
-    cta: '开始 14 天免费试用',
-    ctaHref: '#',
-    featured: true,
-    tag: '最受欢迎',
-  },
-  {
-    name: '企业版',
-    desc: '私有化部署与极致安全',
-    price: '定制',
-    interval: '',
-    features: ['独立高吞吐物理集群', '无限制定制化规则', '1对1专属架构师', 'SLA 99.99% 保障', '私有化部署支持'],
-    cta: '联系销售团队',
-    ctaHref: '#',
-    featured: false,
-    tag: '',
-  },
-];
+import { getTranslations } from '../i18n';
+
+// Get locale from URL path - /en/ for English, / for Chinese
+const path = Astro.url.pathname;
+const currentLocale = path.startsWith('/en') ? 'en' : 'zh';
+const t = getTranslations(currentLocale);
+
+const plans = t.pricing.plans.map((plan, i) => ({
+  ...plan,
+  featured: i === 1,
+  tag: i === 1 ? t.pricing.mostPopular : '',
+  price: i === 2 ? 'Custom' : i === 1 ? '399' : '99',
+}));
 ---
 
 <section class="pricing section" id="pricing">
   <div class="container">
     <div class="island">
     <div class="pricing__header">
-      <p class="section-eyebrow">定价方案</p>
-      <h2 class="section-title">适配各类规模的定制方案</h2>
-      <p class="section-desc">无论您是需要基础的数据监控，还是构建千万级并发的抓取引擎，我们都有合适的选择。</p>
-      <p class="section-desc" style="margin: 0 auto">所有方案均包含 14 天免费试用，无需提供信用卡信息。</p>
+      <p class="section-eyebrow">{t.pricing.eyebrow}</p>
+      <h2 class="section-title">{t.pricing.title.replace('\\n', '<br />')}</h2>
+      <p class="section-desc">{t.pricing.description}</p>
+      <p class="section-desc" style="margin: 0 auto">{t.pricing.trialNote}</p>
 
       <!-- Toggle -->
       <div class="pricing__toggle">
-        <span class="pricing__toggle-label" id="label-monthly">按月付费</span>
-        <button class="pricing__toggle-btn" id="billing-toggle" aria-label="切换付费周期" aria-pressed="false">
+        <span class="pricing__toggle-label" id="label-monthly">{t.pricing.monthly}</span>
+        <button class="pricing__toggle-btn" id="billing-toggle" aria-label="Toggle billing period" aria-pressed="false">
           <span class="pricing__toggle-thumb"></span>
         </button>
         <span class="pricing__toggle-label" id="label-annual">
-          按年付费
-          <span class="pricing__toggle-save">省 20%</span>
+          {t.pricing.annual}
+          <span class="pricing__toggle-save">{t.pricing.save}</span>
         </span>
       </div>
     </div>
@@ -70,12 +48,12 @@ const plans = [
             <div class="pricing-card__desc">{plan.desc}</div>
           </div>
           <div class="pricing-card__price">
-            <span class="pricing-card__amount" data-monthly={plan.price} data-annual={plan.price === '¥0' ? '¥0' : `¥${parseInt(plan.price.replace('¥', '')) * 0.8 | 0}`}>
+            <span class="pricing-card__amount" data-monthly={plan.price} data-annual={plan.price === 'Custom' ? 'Custom' : `¥${parseInt(plan.price) * 0.8 | 0}`}>
               {plan.price}
             </span>
             <span class="pricing-card__period">{plan.interval}</span>
           </div>
-          <a href={plan.ctaHref} class:list={['btn', plan.featured ? 'btn--primary' : 'btn--ghost']}>
+          <a href="#" class:list={['btn', plan.featured ? 'btn--primary' : 'btn--ghost']}>
             {plan.cta}
           </a>
           <ul class="pricing-card__features">
@@ -95,8 +73,8 @@ const plans = [
 
     <!-- Enterprise note -->
     <div class="pricing__enterprise">
-      <p>需要超过 500 名用户的定制方案？
-        <a href="#" class="pricing__enterprise-link">联系我们的企业销售团队 →</a>
+      <p>{t.pricing.contactEnterprise}
+        <a href="#" class="pricing__enterprise-link">{t.pricing.contactSales} →</a>
       </p>
     </div>
     </div>

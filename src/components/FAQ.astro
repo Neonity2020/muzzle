@@ -1,22 +1,10 @@
 ---
-const faqs = [
-  {
-    q: 'Muzzle 和自己运行 Open Claw 有什么区别？',
-    a: '我们解决了部署、维护、代理池和规则更新的所有痛点。并提供深度定制开发，让您专注于业务数据，而非底层基础架构。',
-  },
-  {
-    q: '你们支持哪些平台的抓取？',
-    a: '只要是公开数据，我们的定制 Open Claw 都能处理。我们特别擅长定制复杂的动态页面和强反爬站点的采集规则。',
-  },
-  {
-    q: '如果我们需要极高并发量怎么办？',
-    a: 'Muzzle 专为规模扩张而设计。我们的企业版支持高达千万级的并发请求，您可以随时升级集群资源，无需重新配置。',
-  },
-  {
-    q: '目标站点经常改版导致规则失效怎么办？',
-    a: '我们会为定制规则提供托管维护服务。一旦目标页面结构变动，我们的监控系统会立即告警，技术专家将在第一时间修复规则。',
-  },
-];
+import { getTranslations } from '../i18n';
+
+// Get locale from URL path - /en/ for English, / for Chinese
+const path = Astro.url.pathname;
+const currentLocale = path.startsWith('/en') ? 'en' : 'zh';
+const t = getTranslations(currentLocale);
 ---
 
 <section class="faq section" id="faq">
@@ -24,13 +12,13 @@ const faqs = [
     <div class="island">
     <div class="faq__layout">
       <div class="faq__header">
-        <p class="section-eyebrow">常见问题</p>
-        <h2 class="section-title">一切您想了解的</h2>
-        <p class="section-desc">找不到您的问题？<br /><a href="#" class="faq__contact-link">联系我们的支持团队 →</a></p>
+        <p class="section-eyebrow">{t.faq.eyebrow}</p>
+        <h2 class="section-title">{t.faq.title.replace('\\n', '<br />')}</h2>
+        <p class="section-desc">{t.faq.description}<br /><a href="#" class="faq__contact-link">{t.faq.contactLink}</a></p>
       </div>
 
       <div class="faq__list">
-        {faqs.map((faq, i) => (
+        {t.faq.items.map((faq, i) => (
           <div class="faq__item" data-index={i}>
             <button class="faq__question" aria-expanded="false" aria-controls={`faq-answer-${i}`} id={`faq-question-${i}`}>
               <span>{faq.q}</span>

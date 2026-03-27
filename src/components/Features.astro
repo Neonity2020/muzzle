@@ -1,38 +1,10 @@
 ---
-const features = [
-  {
-    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-    tag: 'AI 协作',
-    title: 'AI 智能协作',
-    description: '借助共享空间让团队更好地协作。指派任务、在上下文中留下反馈，并将所有更新集中在一个地方——告别分散的聊天和无尽的邮件链。',
-    color: '#E8511A',
-    bg: '#FFF0EA',
-  },
-  {
-    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-    tag: '智能提醒',
-    title: '开箱即用',
-    description: '免去繁杂部署与繁琐配置。Muzzle 为您提供一键可用、性能极致优化的 Open Claw 专属云端环境。',
-    color: '#6366F1',
-    bg: '#EEF2FF',
-  },
-  {
-    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-    tag: '团队优先',
-    title: '深度定制规则',
-    description: '无论是复杂的动态页面、强反爬机制，还是多维自动化流程。我们的架构专家都可以为您编写深度定制的专属 Claw 规则与插件。',
-    color: '#10B981',
-    bg: '#ECFDF5',
-  },
-  {
-    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-    tag: '企业安全',
-    title: '高可用集群',
-    description: '底层依托分布式架构，支持无限横向扩展。内置智能代理池、失败重试机制，提供企业级的超高并发抓取保障与数据稳定性。SOC 2 Type II 认证，完全符合 GDPR 规范，支持 SSO 单点登录和高级权限控制，让您安心专注于业务。',
-    color: '#F59E0B',
-    bg: '#FFFBEB',
-  },
-];
+import { getTranslations } from '../i18n';
+
+// Get locale from URL path - /en/ for English, / for Chinese
+const path = Astro.url.pathname;
+const currentLocale = path.startsWith('/en') ? 'en' : 'zh';
+const t = getTranslations(currentLocale);
 ---
 
 <section class="features section" id="features">
@@ -40,27 +12,32 @@ const features = [
     <div class="island">
     <!-- Section header -->
     <div class="features__header">
-      <p class="section-eyebrow">核心能力</p>
-      <h2 class="section-title">释放 Open Claw 的<br />真正潜力</h2>
-      <p class="section-desc">无需面对服务器维护与复杂的代理管理，Muzzle 将抓取、计算与自动化服务融为一体，让您的系统如虎添翼。</p>
+      <p class="section-eyebrow">{t.features.eyebrow}</p>
+      <h2 class="section-title">{t.features.title.replace('\\n', '<br />')}</h2>
+      <p class="section-desc">{t.features.description}</p>
     </div>
 
     <!-- Feature cards grid -->
     <div class="features__grid">
-      {features.map((f, i) => (
+      {t.features.items.map((f, i) => (
         <div class="feature-card" data-animate style={`--delay: ${i * 80}ms`}>
-          <div class="feature-card__icon-wrap" style={`background: ${f.bg}; color: ${f.color}`}>
-            <Fragment set:html={f.icon} />
+          <div class="feature-card__icon-wrap" style={`background: ${['#FFF0EA', '#EEF2FF', '#ECFDF5', '#FFFBEB'][i]}; color: ${['#E8511A', '#6366F1', '#10B981', '#F59E0B'][i]}`}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              {i === 0 && <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>}
+              {i === 1 && <path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>}
+              {i === 2 && <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>}
+              {i === 3 && <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>}
+            </svg>
           </div>
-          <span class="feature-card__tag" style={`background: ${f.bg}; color: ${f.color}`}>
+          <span class="feature-card__tag" style={`background: ${['#FFF0EA', '#EEF2FF', '#ECFDF5', '#FFFBEB'][i]}; color: ${['#E8511A', '#6366F1', '#10B981', '#F59E0B'][i]}`}>
             {f.tag}
           </span>
           <h3 class="feature-card__title">{f.title}</h3>
           <p class="feature-card__desc">{f.description}</p>
 
           <div class="feature-card__footer">
-            <a href="#how-it-works" class="feature-card__link" style={`color: ${f.color}`}>
-              了解更多
+            <a href="#how-it-works" class="feature-card__link" style={`color: ${['#E8511A', '#6366F1', '#10B981', '#F59E0B'][i]}`}>
+              {t.features.learnMore}
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -73,26 +50,15 @@ const features = [
     <!-- Big feature banner -->
     <div class="features__banner stripe-bg" data-animate>
       <div class="features__banner-content">
-        <p class="section-eyebrow">无缝集成</p>
-        <h3 class="features__banner-title">与您现有的<br />工作流完美融合</h3>
-        <p class="features__banner-desc">连接 50+ 款工具，包括 Slack、GitHub、Figma、Notion 等，打造真正属于您的工作中枢。</p>
-        <a href="#pricing" class="btn btn--primary" style="margin-top: 24px">查看所有集成</a>
+        <p class="section-eyebrow">{t.features.banner.eyebrow}</p>
+        <h3 class="features__banner-title">{t.features.banner.title.replace('\\n', '<br />')}</h3>
+        <p class="features__banner-desc">{t.features.banner.description}</p>
+        <a href="#pricing" class="btn btn--primary" style="margin-top: 24px">{t.features.banner.cta}</a>
       </div>
       <div class="features__banner-visual">
         <div class="features__integration-grid">
-          {[
-            { name: 'Slack', color: '#4A154B', emoji: '💬' },
-            { name: 'GitHub', color: '#24292F', emoji: '🐙' },
-            { name: 'Figma', color: '#F24E1E', emoji: '🎨' },
-            { name: 'Notion', color: '#000', emoji: '📝' },
-            { name: 'Linear', color: '#5E6AD2', emoji: '📊' },
-            { name: 'Vercel', color: '#000', emoji: '▲' },
-            { name: 'Stripe', color: '#6772E5', emoji: '💳' },
-            { name: 'Zapier', color: '#FF4A00', emoji: '⚡' },
-            { name: 'Loom', color: '#7B5EB8', emoji: '🎥' },
-          ].map(int => (
+          {t.features.integrations.map(int => (
             <div class="features__integration-chip">
-              <span class="features__integration-emoji">{int.emoji}</span>
               <span class="features__integration-name">{int.name}</span>
             </div>
           ))}
@@ -250,6 +216,7 @@ const features = [
   .features__integration-chip {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     background: white;
     border: 1px solid rgba(0,0,0,0.08);
@@ -261,10 +228,6 @@ const features = [
   .features__integration-chip:hover {
     box-shadow: 0 4px 16px rgba(0,0,0,0.1);
     transform: scale(1.03);
-  }
-
-  .features__integration-emoji {
-    font-size: 20px;
   }
 
   .features__integration-name {

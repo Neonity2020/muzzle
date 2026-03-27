@@ -1,61 +1,37 @@
 ---
-const testimonials = [
-  {
-    author: 'David Chen',
-    role: 'CTO @ DataSphere',
-    avatar: '/avatars/1.png',
-    avatarColor: '#E8511A',
-    rating: 5,
-    quote: 'Muzzle 彻底改变了我们的数据获取方式。单日抓取量提升了 400%，而且再也没有遇到过 IP 被封禁的问题。这是我用过最省心的服务。',
-    featured: true,
-  },
-  {
-    name: '李晓丽',
-    role: '产品经理 · Sudo 创始人',
-    avatar: '/avatars/2.png',
-    avatarColor: '#6366F1',
-    rating: 5,
-    quote: '智能提醒功能让我从"救火模式"切换到了"主动管理"。再也不会错过任何关键节点了。AI 洞察真的非常准确，超出了预期。',
-    featured: false,
-  },
-  {
-    author: 'Sarah Jenkins',
-    role: '数据总监 @ AutoMarket',
-    avatar: '/avatars/3.png',
-    avatarColor: '#10B981',
-    rating: 5,
-    quote: '专家团队帮我们解决了极度复杂的动态渲染抓取难题。与我们内部数据库的对接非常顺滑，团队完全不需要自己维护底层基础架构。',
-    featured: false,
-  },
-  {
-    name: '苏雨欣',
-    role: '设计总监 · PixelStudio',
-    avatar: '/avatars/4.png',
-    avatarColor: '#F59E0B',
-    rating: 5,
-    quote: '个性化定制功能让我惊喜。系统真的会学习我的工作偏好，随着时间推移变得越来越懂我。感觉像是有一个 24 小时在线的超级助手。',
-    featured: false,
-  },
-];
+import { getTranslations } from '../i18n';
+
+// Get locale from URL path - /en/ for English, / for Chinese
+const path = Astro.url.pathname;
+const currentLocale = path.startsWith('/en') ? 'en' : 'zh';
+const t = getTranslations(currentLocale);
+
+const testimonials = t.testimonials.items.map((item, i) => ({
+  ...item,
+  featured: i === 0,
+  rating: 5,
+  avatar: ['/avatars/1.png', '/avatars/2.png', '/avatars/3.png', '/avatars/4.png'][i],
+  avatarColor: ['#E8511A', '#6366F1', '#10B981', '#F59E0B'][i],
+}));
 ---
 
 <section class="testimonials section" id="testimonials">
   <div class="container">
     <div class="island">
     <div class="testimonials__header">
-      <p class="section-eyebrow">用户评价</p>
-      <h2 class="section-title">深受企业客户喜爱</h2>
-      <p class="section-desc">他们成功构建了属于自己的数据引擎，您也可以。</p>
+      <p class="section-eyebrow">{t.testimonials.eyebrow}</p>
+      <h2 class="section-title">{t.testimonials.title.replace('\\n', '<br />')}</h2>
+      <p class="section-desc">{t.testimonials.description}</p>
     </div>
 
     <!-- Rating summary -->
     <div class="testimonials__summary">
-      <div class="testimonials__rating-big">4.9</div>
+      <div class="testimonials__rating-big">{t.testimonials.ratingBig}</div>
       <div class="testimonials__rating-info">
         <div class="testimonials__stars-big">★★★★★</div>
-        <div class="testimonials__rating-text">基于 <strong>1,200+</strong> 条真实评价</div>
+        <div class="testimonials__rating-text" set:html={t.testimonials.basedOnReviews} />
         <div class="testimonials__platforms">
-          <span>G2 评分 4.9</span>
+          <span>G2 4.9</span>
           <span>Product Hunt #1</span>
           <span>Capterra 4.8</span>
         </div>
@@ -64,20 +40,20 @@ const testimonials = [
 
     <!-- Testimonial grid -->
     <div class="testimonials__grid">
-      {testimonials.map((t, i) => (
-        <div class:list={['testimonial-card', t.featured && 'testimonial-card--featured']} data-animate style={`--delay: ${i * 100}ms`}>
-          {t.featured && (
-            <div class="testimonial-card__badge">⭐ 精选评价</div>
+      {testimonials.map((t_item, i) => (
+        <div class:list={['testimonial-card', t_item.featured && 'testimonial-card--featured']} data-animate style={`--delay: ${i * 100}ms`}>
+          {t_item.featured && (
+            <div class="testimonial-card__badge">{t.testimonials.featuredBadge}</div>
           )}
           <div class="testimonial-card__stars">
-            {'★'.repeat(t.rating)}
+            {'★'.repeat(t_item.rating)}
           </div>
-          <p class="testimonial-card__quote">"{t.quote}"</p>
+          <p class="testimonial-card__quote">"{t_item.quote}"</p>
           <div class="testimonial-card__author">
-            <img src={t.avatar} alt={t.name || t.author} class="testimonial-card__avatar" style={`background: ${t.avatarColor}`} />
+            <img src={t_item.avatar} alt={t_item.name} class="testimonial-card__avatar" style={`background: ${t_item.avatarColor}`} />
             <div>
-              <div class="testimonial-card__name">{t.name}</div>
-              <div class="testimonial-card__role">{t.role}</div>
+              <div class="testimonial-card__name">{t_item.name}</div>
+              <div class="testimonial-card__role">{t_item.role}</div>
             </div>
           </div>
         </div>

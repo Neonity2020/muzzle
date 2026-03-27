@@ -1,4 +1,13 @@
 ---
+import { getTranslations } from '../i18n';
+
+// Get locale from URL path - /en/ for English, / for Chinese
+const path = Astro.url.pathname;
+const currentLocale = path.startsWith('/en') ? 'en' : 'zh';
+const t = getTranslations(currentLocale);
+
+// Split title by \n for line breaks
+const titleLines = t.hero.title.split('\\n');
 ---
 
 <section class="hero section" id="hero">
@@ -10,31 +19,33 @@
 
       <div class="hero__inner">
         <h1 class="hero__title">
-          您专属的<br />高度定制化 Open Claw
+          {titleLines.map((line, i) => (
+            <span class:hero__headline-line={i === titleLines.length - 1} class:hero__headline-line--accent={i === titleLines.length - 1}>
+              {line}<br />
+            </span>
+          ))}
         </h1>
-        <p class="hero__desc">
-          Muzzle 提供企业级的 Open Claw 服务托管与深度定制。无需从零搭建，开箱即用的强大抓取与自动化能力，完美融入您的业务流。
-        </p>
+        <p class="hero__desc" set:html={t.hero.description} />
 
         <!-- CTA Buttons -->
         <div class="hero__actions" data-animate>
-          <a href="#pricing" class="btn btn--primary">获取定制方案</a>
-          <a href="#how-it-works" class="btn btn--ghost">查看系统演示</a>
+          <a href="#pricing" class="btn btn--primary">{t.hero.cta}</a>
+          <a href="#how-it-works" class="btn btn--ghost">{t.hero.demo}</a>
         </div>
 
         <!-- Social proof -->
         <div class="hero__social-proof" data-animate>
           <div class="hero__avatars">
-            <img src="/avatars/1.png" alt="用户1" class="hero__avatar" aria-hidden="true" />
-            <img src="/avatars/2.png" alt="用户2" class="hero__avatar" aria-hidden="true" />
-            <img src="/avatars/3.png" alt="用户3" class="hero__avatar" aria-hidden="true" />
-            <img src="/avatars/4.png" alt="用户4" class="hero__avatar" aria-hidden="true" />
+            <img src="/avatars/1.png" alt="User1" class="hero__avatar" aria-hidden="true" />
+            <img src="/avatars/2.png" alt="User2" class="hero__avatar" aria-hidden="true" />
+            <img src="/avatars/3.png" alt="User3" class="hero__avatar" aria-hidden="true" />
+            <img src="/avatars/4.png" alt="User4" class="hero__avatar" aria-hidden="true" />
           </div>
           <div class="hero__social-text">
-            <div class="hero__stars" aria-label="五星好评">
+            <div class="hero__stars" aria-label="5 star reviews">
               ★★★★★
             </div>
-            <span>已有 <strong>2,000+</strong> 支团队信任我们</span>
+            <span set:html={t.hero.socialProof} />
           </div>
         </div>
 
@@ -45,10 +56,10 @@
             <div class="hero__notif hero__notif--1">
               <div class="hero__notif-icon">🚀</div>
               <div>
-                <div class="hero__notif-title">部署成功</div>
-                <div class="hero__notif-sub">版本 2.4.1 已上线</div>
+                <div class="hero__notif-title">{t.hero.dashboard.deploySuccess}</div>
+                <div class="hero__notif-sub">{t.hero.dashboard.deployVersion}</div>
               </div>
-              <span class="hero__notif-badge">刚刚</span>
+              <span class="hero__notif-badge">{t.hero.dashboard.justNow}</span>
             </div>
 
             <!-- Main dashboard mockup -->
@@ -69,7 +80,7 @@
                       <path d="M8 22L14 10L20 18L23 14L24 22" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </div>
-                  {['仪表板', '项目', '分析', '团队', '设置'].map((item, i) => (
+                  {[t.hero.dashboard.sidebar.dashboard, t.hero.dashboard.sidebar.projects, t.hero.dashboard.sidebar.analytics, t.hero.dashboard.sidebar.team, t.hero.dashboard.sidebar.settings].map((item, i) => (
                     <div class:list={['hero__mockup-nav-item', i === 0 && 'active']}>{item}</div>
                   ))}
                 </div>
@@ -78,9 +89,9 @@
                 <div class="hero__mockup-content">
                   <div class="hero__mockup-stats">
                     {[
-                      { label: '活跃用户', value: '12,847', change: '+18%', color: '#E8511A' },
-                      { label: '月收入', value: '¥38.2K', change: '+24%', color: '#10B981' },
-                      { label: '转化率', value: '4.8%', change: '+7%', color: '#6366F1' },
+                      { label: t.hero.dashboard.stats.activeUsers, value: '12,847', change: '+18%', color: '#E8511A' },
+                      { label: t.hero.dashboard.stats.monthlyRevenue, value: '¥38.2K', change: '+24%', color: '#10B981' },
+                      { label: t.hero.dashboard.stats.conversionRate, value: '4.8%', change: '+7%', color: '#6366F1' },
                     ].map(stat => (
                       <div class="hero__mockup-stat">
                         <div class="hero__mockup-stat-label">{stat.label}</div>
@@ -96,7 +107,7 @@
                         <div class="hero__chart-bar" style={`height: ${h}%`}></div>
                       ))}
                     </div>
-                    <div class="hero__chart-label">过去 12 个月收入趋势</div>
+                    <div class="hero__chart-label">{t.hero.dashboard.chartLabel}</div>
                   </div>
                 </div>
               </div>
@@ -106,8 +117,8 @@
             <div class="hero__notif hero__notif--2">
               <div class="hero__notif-icon">📈</div>
               <div>
-                <div class="hero__notif-title">新用户激增</div>
-                <div class="hero__notif-sub">今日新增 +347 用户</div>
+                <div class="hero__notif-title">{t.hero.dashboard.newUserSurge}</div>
+                <div class="hero__notif-sub">{t.hero.dashboard.newUsersToday}</div>
               </div>
             </div>
           </div>
@@ -115,7 +126,7 @@
 
         <!-- Partner logos -->
         <div class="hero__partners" data-animate>
-          <p class="hero__partners-label">获得顶级团队的信任</p>
+          <p class="hero__partners-label">{t.hero.partnersLabel}</p>
           <div class="hero__partners-logos">
             {['Vercel', 'Linear', 'Notion', 'Loom', 'Arc', 'Framer'].map(name => (
               <span class="hero__partner-logo">{name}</span>
@@ -177,15 +188,11 @@
     z-index: 1;
   }
 
-  .hero__tag {
-    margin-bottom: 28px;
-  }
-
-  .hero__headline {
-    font-size: clamp(60px, 9vw, 96px);
+  .hero__title {
+    font-size: clamp(48px, 8vw, 72px);
     font-weight: 900;
-    line-height: 1.0;
-    letter-spacing: -0.04em;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
     margin-bottom: 28px;
     display: flex;
     flex-direction: column;
@@ -552,7 +559,7 @@
 <script>
   // Animate on scroll
   const animateEls = document.querySelectorAll('[data-animate]');
-  
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {

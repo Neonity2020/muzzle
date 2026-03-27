@@ -1,4 +1,11 @@
 ---
+import { getTranslations } from '../i18n';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
+// Get locale from URL path - /en/ for English, / for Chinese
+const path = Astro.url.pathname;
+const currentLocale = path.startsWith('/en') ? 'en' : 'zh';
+const t = getTranslations(currentLocale);
 ---
 
 <header class="navbar" id="navbar">
@@ -11,21 +18,22 @@
           <path d="M8 22L14 10L20 18L23 14L24 22" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </span>
-      <span class="navbar__logo-text">Muzzle</span>
+      <span class="navbar__logo-text">{t.navbar.logo}</span>
     </a>
 
     <!-- Nav Links -->
     <nav class="navbar__nav" aria-label="Main navigation">
-      <a href="#features" class="navbar__link">功能</a>
-      <a href="#how-it-works" class="navbar__link">工作原理</a>
-      <a href="#pricing" class="navbar__link">定价</a>
-      <a href="#faq" class="navbar__link">常见问题</a>
+      <a href="#features" class="navbar__link">{t.navbar.features}</a>
+      <a href="#how-it-works" class="navbar__link">{t.navbar.howItWorks}</a>
+      <a href="#pricing" class="navbar__link">{t.navbar.pricing}</a>
+      <a href="#faq" class="navbar__link">{t.navbar.faq}</a>
     </nav>
 
-    <!-- CTA -->
+    <!-- CTA + Language Switcher -->
     <div class="navbar__cta">
-      <a href="#pricing" class="btn btn--ghost btn--sm">登录</a>
-      <a href="#pricing" class="btn btn--dark btn--sm">免费开始</a>
+      <LanguageSwitcher />
+      <a href="#pricing" class="btn btn--ghost btn--sm">{t.navbar.login}</a>
+      <a href="#pricing" class="btn btn--dark btn--sm">{t.navbar.getStarted}</a>
     </div>
 
     <!-- Mobile Menu Button -->
@@ -38,13 +46,13 @@
 
   <!-- Mobile Menu -->
   <div class="navbar__mobile" id="mobile-menu" aria-hidden="true">
-    <a href="#features" class="navbar__mobile-link">功能</a>
-    <a href="#how-it-works" class="navbar__mobile-link">工作原理</a>
-    <a href="#pricing" class="navbar__mobile-link">定价</a>
-    <a href="#faq" class="navbar__mobile-link">常见问题</a>
+    <a href="#features" class="navbar__mobile-link">{t.navbar.features}</a>
+    <a href="#how-it-works" class="navbar__mobile-link">{t.navbar.howItWorks}</a>
+    <a href="#pricing" class="navbar__mobile-link">{t.navbar.pricing}</a>
+    <a href="#faq" class="navbar__mobile-link">{t.navbar.faq}</a>
     <div class="navbar__mobile-cta">
-      <a href="#pricing" class="btn btn--ghost btn--sm">登录</a>
-      <a href="#pricing" class="btn btn--primary btn--sm">免费开始</a>
+      <a href="#pricing" class="btn btn--ghost btn--sm">{t.navbar.login}</a>
+      <a href="#pricing" class="btn btn--primary btn--sm">{t.navbar.getStarted}</a>
     </div>
   </div>
 </header>
@@ -117,7 +125,7 @@
   .navbar__cta {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
     flex-shrink: 0;
   }
 
@@ -198,13 +206,16 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .navbar__nav,
-    .navbar__cta {
+    .navbar__cta .btn:not(.lang-switcher) {
       display: none;
     }
     .navbar__burger {
       display: flex;
+    }
+    .navbar__cta {
+      gap: 8px;
     }
   }
 </style>

@@ -5,10 +5,14 @@ interface Props {
 }
 
 const { title, description = "Launch your next big idea with Mizu — a sleek, responsive landing page built for SaaS startups and tech companies." } = Astro.props;
+
+// Get locale from URL path - /en/ for English, / for Chinese
+const path = Astro.url.pathname;
+const currentLocale = path.startsWith('/en') ? 'en' : 'zh';
 ---
 
 <!doctype html>
-<html lang="zh">
+<html lang={currentLocale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
